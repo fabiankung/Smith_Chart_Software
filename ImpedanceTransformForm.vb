@@ -53,6 +53,9 @@ Public Class ImpedanceTransformForm
     Friend WithEvents SetLoadButton As System.Windows.Forms.Button
     Friend WithEvents ZL_XLabel As System.Windows.Forms.Label
     Friend WithEvents ZL_RLabel As System.Windows.Forms.Label
+    Friend WithEvents X1LumpedLabel As System.Windows.Forms.Label
+    Friend WithEvents B2LumpedLabel As System.Windows.Forms.Label
+    Friend WithEvents B1LumpedLabel As System.Windows.Forms.Label
 
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
@@ -93,6 +96,9 @@ Public Class ImpedanceTransformForm
         Me.SetLoadButton = New System.Windows.Forms.Button()
         Me.ZL_XLabel = New System.Windows.Forms.Label()
         Me.ZL_RLabel = New System.Windows.Forms.Label()
+        Me.X1LumpedLabel = New System.Windows.Forms.Label()
+        Me.B2LumpedLabel = New System.Windows.Forms.Label()
+        Me.B1LumpedLabel = New System.Windows.Forms.Label()
         CType(Me.B1TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.B2TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.X1TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -319,25 +325,25 @@ Public Class ImpedanceTransformForm
         'X1Label
         '
         Me.X1Label.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.X1Label.Location = New System.Drawing.Point(315, 13)
+        Me.X1Label.Location = New System.Drawing.Point(226, 86)
         Me.X1Label.Name = "X1Label"
-        Me.X1Label.Size = New System.Drawing.Size(47, 31)
+        Me.X1Label.Size = New System.Drawing.Size(48, 21)
         Me.X1Label.TabIndex = 36
         '
         'B1Label
         '
         Me.B1Label.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.B1Label.Location = New System.Drawing.Point(260, 127)
+        Me.B1Label.Location = New System.Drawing.Point(263, 144)
         Me.B1Label.Name = "B1Label"
-        Me.B1Label.Size = New System.Drawing.Size(56, 31)
+        Me.B1Label.Size = New System.Drawing.Size(55, 24)
         Me.B1Label.TabIndex = 37
         '
         'B2Label
         '
         Me.B2Label.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.B2Label.Location = New System.Drawing.Point(108, 127)
+        Me.B2Label.Location = New System.Drawing.Point(111, 144)
         Me.B2Label.Name = "B2Label"
-        Me.B2Label.Size = New System.Drawing.Size(55, 31)
+        Me.B2Label.Size = New System.Drawing.Size(57, 24)
         Me.B2Label.TabIndex = 38
         '
         'SetLoadButton
@@ -366,10 +372,37 @@ Public Class ImpedanceTransformForm
         Me.ZL_RLabel.Size = New System.Drawing.Size(66, 20)
         Me.ZL_RLabel.TabIndex = 40
         '
+        'X1LumpedLabel
+        '
+        Me.X1LumpedLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.X1LumpedLabel.Location = New System.Drawing.Point(226, 111)
+        Me.X1LumpedLabel.Name = "X1LumpedLabel"
+        Me.X1LumpedLabel.Size = New System.Drawing.Size(77, 21)
+        Me.X1LumpedLabel.TabIndex = 42
+        '
+        'B2LumpedLabel
+        '
+        Me.B2LumpedLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.B2LumpedLabel.Location = New System.Drawing.Point(111, 171)
+        Me.B2LumpedLabel.Name = "B2LumpedLabel"
+        Me.B2LumpedLabel.Size = New System.Drawing.Size(57, 33)
+        Me.B2LumpedLabel.TabIndex = 43
+        '
+        'B1LumpedLabel
+        '
+        Me.B1LumpedLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.B1LumpedLabel.Location = New System.Drawing.Point(263, 171)
+        Me.B1LumpedLabel.Name = "B1LumpedLabel"
+        Me.B1LumpedLabel.Size = New System.Drawing.Size(55, 33)
+        Me.B1LumpedLabel.TabIndex = 44
+        '
         'ImpedanceTransformForm
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
         Me.ClientSize = New System.Drawing.Size(541, 389)
+        Me.Controls.Add(Me.B1LumpedLabel)
+        Me.Controls.Add(Me.B2LumpedLabel)
+        Me.Controls.Add(Me.X1LumpedLabel)
         Me.Controls.Add(Me.ZL_XLabel)
         Me.Controls.Add(Me.ZL_RLabel)
         Me.Controls.Add(Me.SetLoadButton)
@@ -427,6 +460,7 @@ Public Class ImpedanceTransformForm
     Public mstrFormTitle As String
     Public mstrVersion As String
     Public mobjInterFormMessage As New MessageClass
+    Public Const PI As Double = 3.1415926535897931
 
     'Variables
     Private mobjZL As New ComplexNumberClass(0.001, 0)  'Load impedance ZL
@@ -464,6 +498,10 @@ Public Class ImpedanceTransformForm
             X1Label.Text = CStr(mdblX1)
             B1Label.Text = CStr(mdblB1)
             B2Label.Text = CStr(mdblB2)
+            X1LumpedLabel.Text = "Short"
+            B1LumpedLabel.Text = "Open"
+            B2LumpedLabel.Text = "Open"
+
             X1MaxTextBox.Text = CStr(mdblX1Max)
             X1MinTextBox.Text = CStr(mdblX1Min)
             B1MaxTextBox.Text = CStr(mdblB1Max)
@@ -547,6 +585,8 @@ Public Class ImpedanceTransformForm
 
     Private Sub X1TrackBar_Scroll(sender As Object, e As EventArgs) Handles X1TrackBar.Scroll
         Dim nIndex As Integer
+        Dim dblXLump As Double
+        Dim dblwo As Double
 
         nIndex = X1TrackBar.Value
         mdblX1 = (nIndex * mdblX1Delta) + mdblX1Min
@@ -558,6 +598,18 @@ Public Class ImpedanceTransformForm
         GinLabel.Text = Format(mobjYin.Real, "####0.0000")
         BinLabel.Text = Format(mobjYin.Imagninary, "####0.0000")
 
+        'Calculate the corresponding lumped component and display on window
+        dblwo = 2 * PI * mobjInterFormMessage.dblFreq  'Calculate frequency in rad/sec
+        If mdblX1 > 0.0 Then    'Inductance
+            dblXLump = (mdblX1 / dblwo) * 1000000000.0 'Normalize to nH
+            X1LumpedLabel.Text = "L=" & Format(dblXLump, "####0.00") & " nH"
+        ElseIf mdblX1 < 0.0 Then 'Capacitance
+            dblXLump = (1 / (-mdblX1 * dblwo)) * 1000000000000.0 'Normalize to pF
+            X1LumpedLabel.Text = "C=" & Format(dblXLump, "####0.00") & " pF"
+        Else '0.0, short circuit
+            X1LumpedLabel.Text = "Short"
+        End If
+
         'Display this on the Smith Chart
         MainForm.SmithChartWindow.mobjTaux.Real = mobjTin.Real  'Update the real and imaginary part of auxiliary reflection coefficient
         'in the Smith Chart Form.
@@ -567,6 +619,8 @@ Public Class ImpedanceTransformForm
 
     Private Sub B1TrackBar_Scroll(sender As Object, e As EventArgs) Handles B1TrackBar.Scroll
         Dim nIndex As Integer
+        Dim dblBLump As Double
+        Dim dblwo As Double
 
         nIndex = B1TrackBar.Value
         mdblB1 = (nIndex * mdblB1Delta) + mdblB1Min
@@ -578,6 +632,18 @@ Public Class ImpedanceTransformForm
         GinLabel.Text = Format(mobjYin.Real, "####0.0000")
         BinLabel.Text = Format(mobjYin.Imagninary, "####0.0000")
 
+        'Calculate the corresponding lumped component and display on window
+        dblwo = 2 * PI * mobjInterFormMessage.dblFreq  'Calculate frequency in rad/sec
+        If mdblB1 > 0.0 Then    'Capacitance
+            dblBLump = (mdblB1 / dblwo) * 1000000000000.0 'Normalize to pF
+            B1LumpedLabel.Text = "C=" & Format(dblBLump, "####0.00") & " pF"
+        ElseIf mdblB1 < 0.0 Then 'Inductance
+            dblBLump = (1 / (-mdblB1 * dblwo)) * 1000000000.0 'Normalize to nH
+            B1LumpedLabel.Text = "L=" & Format(dblBLump, "####0.00") & " nH"
+        Else '0.0, open circuit
+            B1LumpedLabel.Text = "Short"
+        End If
+
         'Display this on the Smith Chart
         MainForm.SmithChartWindow.mobjTaux.Real = mobjTin.Real  'Update the real and imaginary part of auxiliary reflection coefficient
         'in the Smith Chart Form.
@@ -587,6 +653,8 @@ Public Class ImpedanceTransformForm
 
     Private Sub B2TrackBar_Scroll(sender As Object, e As EventArgs) Handles B2TrackBar.Scroll
         Dim nIndex As Integer
+        Dim dblBLump As Double
+        Dim dblwo As Double
 
         nIndex = B2TrackBar.Value
         mdblB2 = (nIndex * mdblB2Delta) + mdblB2Min
@@ -597,6 +665,18 @@ Public Class ImpedanceTransformForm
         XinLabel.Text = Format(mobjZin.Imagninary, "####0.00")
         GinLabel.Text = Format(mobjYin.Real, "####0.0000")
         BinLabel.Text = Format(mobjYin.Imagninary, "####0.0000")
+
+        'Calculate the corresponding lumped component and display on window
+        dblwo = 2 * PI * mobjInterFormMessage.dblFreq  'Calculate frequency in rad/sec
+        If mdblB2 > 0.0 Then    'Capacitance
+            dblBLump = (mdblB2 / dblwo) * 1000000000000.0 'Normalize to pF
+            B2LumpedLabel.Text = "C=" & Format(dblBLump, "####0.00") & " pF"
+        ElseIf mdblB2 < 0.0 Then 'Inductance
+            dblBLump = (1 / (-mdblB2 * dblwo)) * 1000000000.0 'Normalize to nH
+            B2LumpedLabel.Text = "L=" & Format(dblBLump, "####0.00") & " nH"
+        Else '0.0, open circuit
+            B2LumpedLabel.Text = "Short"
+        End If
 
         'Display this on the Smith Chart
         MainForm.SmithChartWindow.mobjTaux.Real = mobjTin.Real  'Update the real and imaginary part of auxiliary reflection coefficient
@@ -811,6 +891,8 @@ Public Class ImpedanceTransformForm
     'Language           :  VB .NET
     'Description        :  Subroutine to compute the input impedance looking into a network, consisting
     '                      of a load in series with a Pi network.
+    'Argument           :  None
+
     Private Sub CalculateTin()
         Static Dim objY1 As New ComplexNumberClass(0, 0)
         Static Dim objZ2 As New ComplexNumberClass(0, 0)

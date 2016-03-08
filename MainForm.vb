@@ -169,9 +169,9 @@ Public Class MainForm
     '--- Module level declarations ---
     'Information about this software
     Private mstrFormTitle As String = "RF CAD"
-    Private mstrVersion As String = "0.89"
+    Private mstrVersion As String = "0.90"
     Private mstrAuthor As String = "Fabian Kung Wai Lee"
-    Private mstrDate As String = "2nd March 2016"
+    Private mstrDate As String = "8th March 2016"
 
     'Variables
     Private mdblZo As Double = 50.0 'Reference impedance
