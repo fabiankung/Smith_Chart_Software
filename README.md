@@ -6,4 +6,4 @@ To compile:
 2. Add all the *.vb (visual basic code files) and *.resx (resource files) into the project.
 3. Build  the project.
 
-Alternatively the pre-compile *.exe file is also included, which you can use immediately, for Windows 7 and above.
+Alternatively the pre-compile *.exe file is also included, which you can use immediately, for Windows 7 and above.  Just copy to the harddisk and it should be able to run immediately.
