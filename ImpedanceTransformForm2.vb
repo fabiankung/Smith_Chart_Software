@@ -1,6 +1,6 @@
 Imports System.ComponentModel
 
-Public Class ImpedanceTransformForm
+Public Class ImpedanceTransformForm2
     Inherits System.Windows.Forms.Form
 
 #Region " Windows Form Designer generated code "
@@ -42,22 +42,27 @@ Public Class ImpedanceTransformForm
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents X1TrackBar As System.Windows.Forms.TrackBar
-    Friend WithEvents X1MaxTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents X1MinTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents T1TrackBar As System.Windows.Forms.TrackBar
+    Friend WithEvents T1PhaseMaxTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents T1PhaseMinTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents X1Label As System.Windows.Forms.Label
+    Friend WithEvents T1PhaseLabel As System.Windows.Forms.Label
     Friend WithEvents B1Label As System.Windows.Forms.Label
     Friend WithEvents B2Label As System.Windows.Forms.Label
     Friend WithEvents SetLoadButton As System.Windows.Forms.Button
     Friend WithEvents ZL_XLabel As System.Windows.Forms.Label
     Friend WithEvents ZL_RLabel As System.Windows.Forms.Label
-    Friend WithEvents X1LumpedLabel As System.Windows.Forms.Label
+    Friend WithEvents T1LengthLabel As System.Windows.Forms.Label
     Friend WithEvents B2LumpedLabel As System.Windows.Forms.Label
     Friend WithEvents B1LumpedLabel As System.Windows.Forms.Label
+    Friend WithEvents T1VTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents BetaLabel As System.Windows.Forms.Label
 
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
@@ -66,7 +71,7 @@ Public Class ImpedanceTransformForm
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImpedanceTransformForm))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImpedanceTransformForm2))
         Me.B1TrackBar = New System.Windows.Forms.TrackBar()
         Me.B2TrackBar = New System.Windows.Forms.TrackBar()
         Me.FrequencyLabel = New System.Windows.Forms.Label()
@@ -85,25 +90,30 @@ Public Class ImpedanceTransformForm
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.X1TrackBar = New System.Windows.Forms.TrackBar()
-        Me.X1MaxTextBox = New System.Windows.Forms.TextBox()
-        Me.X1MinTextBox = New System.Windows.Forms.TextBox()
+        Me.T1TrackBar = New System.Windows.Forms.TrackBar()
+        Me.T1PhaseMaxTextBox = New System.Windows.Forms.TextBox()
+        Me.T1PhaseMinTextBox = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.X1Label = New System.Windows.Forms.Label()
+        Me.T1PhaseLabel = New System.Windows.Forms.Label()
         Me.B1Label = New System.Windows.Forms.Label()
         Me.B2Label = New System.Windows.Forms.Label()
         Me.SetLoadButton = New System.Windows.Forms.Button()
         Me.ZL_XLabel = New System.Windows.Forms.Label()
         Me.ZL_RLabel = New System.Windows.Forms.Label()
-        Me.X1LumpedLabel = New System.Windows.Forms.Label()
+        Me.T1LengthLabel = New System.Windows.Forms.Label()
         Me.B2LumpedLabel = New System.Windows.Forms.Label()
         Me.B1LumpedLabel = New System.Windows.Forms.Label()
+        Me.T1VTextBox = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.BetaLabel = New System.Windows.Forms.Label()
         CType(Me.B1TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.B2TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.X1TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.T1TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -165,7 +175,7 @@ Public Class ImpedanceTransformForm
         'XinLabel
         '
         Me.XinLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.XinLabel.Location = New System.Drawing.Point(47, 58)
+        Me.XinLabel.Location = New System.Drawing.Point(40, 58)
         Me.XinLabel.Name = "XinLabel"
         Me.XinLabel.Size = New System.Drawing.Size(55, 21)
         Me.XinLabel.TabIndex = 16
@@ -173,7 +183,7 @@ Public Class ImpedanceTransformForm
         'RinLabel
         '
         Me.RinLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.RinLabel.Location = New System.Drawing.Point(47, 34)
+        Me.RinLabel.Location = New System.Drawing.Point(40, 34)
         Me.RinLabel.Name = "RinLabel"
         Me.RinLabel.Size = New System.Drawing.Size(55, 20)
         Me.RinLabel.TabIndex = 15
@@ -181,7 +191,7 @@ Public Class ImpedanceTransformForm
         'BinLabel
         '
         Me.BinLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.BinLabel.Location = New System.Drawing.Point(47, 108)
+        Me.BinLabel.Location = New System.Drawing.Point(40, 108)
         Me.BinLabel.Name = "BinLabel"
         Me.BinLabel.Size = New System.Drawing.Size(55, 21)
         Me.BinLabel.TabIndex = 18
@@ -189,7 +199,7 @@ Public Class ImpedanceTransformForm
         'GinLabel
         '
         Me.GinLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.GinLabel.Location = New System.Drawing.Point(47, 84)
+        Me.GinLabel.Location = New System.Drawing.Point(40, 84)
         Me.GinLabel.Name = "GinLabel"
         Me.GinLabel.Size = New System.Drawing.Size(55, 20)
         Me.GinLabel.TabIndex = 17
@@ -229,7 +239,7 @@ Public Class ImpedanceTransformForm
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(18, 35)
+        Me.Label3.Location = New System.Drawing.Point(11, 35)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(23, 13)
         Me.Label3.TabIndex = 28
@@ -238,7 +248,7 @@ Public Class ImpedanceTransformForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(18, 57)
+        Me.Label4.Location = New System.Drawing.Point(11, 57)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(22, 13)
         Me.Label4.TabIndex = 29
@@ -247,7 +257,7 @@ Public Class ImpedanceTransformForm
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(18, 86)
+        Me.Label5.Location = New System.Drawing.Point(11, 86)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(23, 13)
         Me.Label5.TabIndex = 30
@@ -256,46 +266,45 @@ Public Class ImpedanceTransformForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(18, 111)
+        Me.Label6.Location = New System.Drawing.Point(11, 111)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(22, 13)
         Me.Label6.TabIndex = 31
         Me.Label6.Text = "Bin"
         '
-        'X1TrackBar
+        'T1TrackBar
         '
-        Me.X1TrackBar.Location = New System.Drawing.Point(94, 239)
-        Me.X1TrackBar.Maximum = 200
-        Me.X1TrackBar.Name = "X1TrackBar"
-        Me.X1TrackBar.Size = New System.Drawing.Size(233, 45)
-        Me.X1TrackBar.TabIndex = 1
-        Me.X1TrackBar.TickFrequency = 10
-        Me.X1TrackBar.Value = 100
+        Me.T1TrackBar.Location = New System.Drawing.Point(94, 239)
+        Me.T1TrackBar.Maximum = 200
+        Me.T1TrackBar.Name = "T1TrackBar"
+        Me.T1TrackBar.Size = New System.Drawing.Size(233, 45)
+        Me.T1TrackBar.TabIndex = 1
+        Me.T1TrackBar.TickFrequency = 10
         '
-        'X1MaxTextBox
+        'T1PhaseMaxTextBox
         '
-        Me.X1MaxTextBox.Location = New System.Drawing.Point(333, 239)
-        Me.X1MaxTextBox.Name = "X1MaxTextBox"
-        Me.X1MaxTextBox.Size = New System.Drawing.Size(44, 20)
-        Me.X1MaxTextBox.TabIndex = 21
-        Me.X1MaxTextBox.Text = "200"
+        Me.T1PhaseMaxTextBox.Location = New System.Drawing.Point(333, 239)
+        Me.T1PhaseMaxTextBox.Name = "T1PhaseMaxTextBox"
+        Me.T1PhaseMaxTextBox.Size = New System.Drawing.Size(44, 20)
+        Me.T1PhaseMaxTextBox.TabIndex = 21
+        Me.T1PhaseMaxTextBox.Text = "4.0"
         '
-        'X1MinTextBox
+        'T1PhaseMinTextBox
         '
-        Me.X1MinTextBox.Location = New System.Drawing.Point(40, 239)
-        Me.X1MinTextBox.Name = "X1MinTextBox"
-        Me.X1MinTextBox.Size = New System.Drawing.Size(48, 20)
-        Me.X1MinTextBox.TabIndex = 22
-        Me.X1MinTextBox.Text = "-200"
+        Me.T1PhaseMinTextBox.Location = New System.Drawing.Point(40, 239)
+        Me.T1PhaseMinTextBox.Name = "T1PhaseMinTextBox"
+        Me.T1PhaseMinTextBox.Size = New System.Drawing.Size(48, 20)
+        Me.T1PhaseMinTextBox.TabIndex = 22
+        Me.T1PhaseMinTextBox.Text = "0"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(202, 223)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(20, 13)
+        Me.Label7.Size = New System.Drawing.Size(73, 13)
         Me.Label7.TabIndex = 32
-        Me.Label7.Text = "X1"
+        Me.Label7.Text = "Beta x Length"
         '
         'Label8
         '
@@ -315,29 +324,20 @@ Public Class ImpedanceTransformForm
         Me.Label9.TabIndex = 34
         Me.Label9.Text = "B2"
         '
-        'PictureBox1
+        'T1PhaseLabel
         '
-        Me.PictureBox1.Image = Global.winRF_CAD.My.Resources.Resources.Pi
-        Me.PictureBox1.Location = New System.Drawing.Point(108, 13)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(419, 204)
-        Me.PictureBox1.TabIndex = 35
-        Me.PictureBox1.TabStop = False
-        '
-        'X1Label
-        '
-        Me.X1Label.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.X1Label.Location = New System.Drawing.Point(226, 86)
-        Me.X1Label.Name = "X1Label"
-        Me.X1Label.Size = New System.Drawing.Size(48, 21)
-        Me.X1Label.TabIndex = 36
+        Me.T1PhaseLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.T1PhaseLabel.Location = New System.Drawing.Point(263, 77)
+        Me.T1PhaseLabel.Name = "T1PhaseLabel"
+        Me.T1PhaseLabel.Size = New System.Drawing.Size(48, 21)
+        Me.T1PhaseLabel.TabIndex = 36
         '
         'B1Label
         '
         Me.B1Label.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.B1Label.Location = New System.Drawing.Point(263, 144)
+        Me.B1Label.Location = New System.Drawing.Point(256, 144)
         Me.B1Label.Name = "B1Label"
-        Me.B1Label.Size = New System.Drawing.Size(55, 24)
+        Me.B1Label.Size = New System.Drawing.Size(62, 24)
         Me.B1Label.TabIndex = 37
         '
         'B2Label
@@ -374,13 +374,13 @@ Public Class ImpedanceTransformForm
         Me.ZL_RLabel.Size = New System.Drawing.Size(66, 20)
         Me.ZL_RLabel.TabIndex = 40
         '
-        'X1LumpedLabel
+        'T1LengthLabel
         '
-        Me.X1LumpedLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.X1LumpedLabel.Location = New System.Drawing.Point(226, 111)
-        Me.X1LumpedLabel.Name = "X1LumpedLabel"
-        Me.X1LumpedLabel.Size = New System.Drawing.Size(77, 21)
-        Me.X1LumpedLabel.TabIndex = 42
+        Me.T1LengthLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.T1LengthLabel.Location = New System.Drawing.Point(226, 103)
+        Me.T1LengthLabel.Name = "T1LengthLabel"
+        Me.T1LengthLabel.Size = New System.Drawing.Size(92, 21)
+        Me.T1LengthLabel.TabIndex = 42
         '
         'B2LumpedLabel
         '
@@ -393,24 +393,83 @@ Public Class ImpedanceTransformForm
         'B1LumpedLabel
         '
         Me.B1LumpedLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.B1LumpedLabel.Location = New System.Drawing.Point(263, 171)
+        Me.B1LumpedLabel.Location = New System.Drawing.Point(256, 171)
         Me.B1LumpedLabel.Name = "B1LumpedLabel"
-        Me.B1LumpedLabel.Size = New System.Drawing.Size(55, 33)
+        Me.B1LumpedLabel.Size = New System.Drawing.Size(62, 33)
         Me.B1LumpedLabel.TabIndex = 44
         '
-        'ImpedanceTransformForm
+        'T1VTextBox
+        '
+        Me.T1VTextBox.Location = New System.Drawing.Point(448, 12)
+        Me.T1VTextBox.Name = "T1VTextBox"
+        Me.T1VTextBox.Size = New System.Drawing.Size(72, 20)
+        Me.T1VTextBox.TabIndex = 45
+        Me.T1VTextBox.Text = "2.998E8"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.winRF_CAD.My.Resources.Resources.DoubleStub
+        Me.PictureBox1.Location = New System.Drawing.Point(111, 13)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(416, 204)
+        Me.PictureBox1.TabIndex = 35
+        Me.PictureBox1.TabStop = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(371, 15)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(77, 13)
+        Me.Label10.TabIndex = 46
+        Me.Label10.Text = "Phase Velocity"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(216, 78)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(42, 13)
+        Me.Label11.TabIndex = 47
+        Me.Label11.Text = "Beta x l"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(373, 35)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(29, 13)
+        Me.Label12.TabIndex = 48
+        Me.Label12.Text = "Beta"
+        '
+        'BetaLabel
+        '
+        Me.BetaLabel.AutoSize = True
+        Me.BetaLabel.Location = New System.Drawing.Point(451, 35)
+        Me.BetaLabel.Name = "BetaLabel"
+        Me.BetaLabel.Size = New System.Drawing.Size(45, 13)
+        Me.BetaLabel.TabIndex = 49
+        Me.BetaLabel.Text = "Label13"
+        '
+        'ImpedanceTransformForm2
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
         Me.ClientSize = New System.Drawing.Size(541, 389)
+        Me.Controls.Add(Me.BetaLabel)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.T1VTextBox)
         Me.Controls.Add(Me.B1LumpedLabel)
         Me.Controls.Add(Me.B2LumpedLabel)
-        Me.Controls.Add(Me.X1LumpedLabel)
+        Me.Controls.Add(Me.T1LengthLabel)
         Me.Controls.Add(Me.ZL_XLabel)
         Me.Controls.Add(Me.ZL_RLabel)
         Me.Controls.Add(Me.SetLoadButton)
         Me.Controls.Add(Me.B2Label)
         Me.Controls.Add(Me.B1Label)
-        Me.Controls.Add(Me.X1Label)
+        Me.Controls.Add(Me.T1PhaseLabel)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
@@ -421,8 +480,8 @@ Public Class ImpedanceTransformForm
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.B2MinTextBox)
         Me.Controls.Add(Me.B1MinTextBox)
-        Me.Controls.Add(Me.X1MinTextBox)
-        Me.Controls.Add(Me.X1MaxTextBox)
+        Me.Controls.Add(Me.T1PhaseMinTextBox)
+        Me.Controls.Add(Me.T1PhaseMaxTextBox)
         Me.Controls.Add(Me.B1MaxTextBox)
         Me.Controls.Add(Me.B2MaxTextBox)
         Me.Controls.Add(Me.BinLabel)
@@ -435,13 +494,13 @@ Public Class ImpedanceTransformForm
         Me.Controls.Add(Me.FrequencyLabel)
         Me.Controls.Add(Me.B2TrackBar)
         Me.Controls.Add(Me.B1TrackBar)
-        Me.Controls.Add(Me.X1TrackBar)
+        Me.Controls.Add(Me.T1TrackBar)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "ImpedanceTransformForm"
+        Me.Name = "ImpedanceTransformForm2"
         Me.Text = "ImpedanceTransformForm"
         CType(Me.B1TrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.B2TrackBar, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.X1TrackBar, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.T1TrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -451,9 +510,9 @@ Public Class ImpedanceTransformForm
 #End Region
 
     'Author:            Fabian Kung Wai Lee
-    'Last modified:     2nd March 2016
+    'Last modified:     1st April 2016
     'Description:       Codes to modify the reflection coefficient in the Smith Chart window      
-    'Filename:          ImpedanceTransformForm.vb
+    'Filename:          ImpedanceTransformForm2.vb
     'Language:          Visual Basic .NET
     'Development tool:  Microsoft Visual Studio .NET 2013 express
 
@@ -473,19 +532,19 @@ Public Class ImpedanceTransformForm
     Private mobjTin As New ComplexNumberClass(0, 0) 'Input reflection coefficient
     Private mobjB1 As New ComplexNumberClass(0, 0)  'jB1
     Private mobjB2 As New ComplexNumberClass(0, 0)  'jB2
-    Private mobjX1 As New ComplexNumberClass(0, 0)  'jX1
     Private mobj1Complex As New ComplexNumberClass(1, 0) ' 1+j0
 
-    Private mdblX1Max As Double = 200
-    Private mdblX1Min As Double = -200
+    Private mdblT1PhaseMax As Double = 4.0
+    Private mdblT1PhaseMin As Double = 0
+    Private mdblT1Vp As Double = 299800000.0
     Private mdblB1Max As Double = 0.02
     Private mdblB1Min As Double = -0.02
     Private mdblB2Max As Double = 0.02
     Private mdblB2Min As Double = -0.02
-    Private mdblX1 As Double = 0.0
+    Private mdblT1Phase As Double = 0.0
     Private mdblB1 As Double = 0.0
     Private mdblB2 As Double = 0.0
-    Private mdblX1Delta As Double = 2
+    Private mdblT1PhaseDelta As Double = 0.02
     Private mdblB1Delta As Double = 0.0002
     Private mdblB2Delta As Double = 0.0002
 
@@ -497,28 +556,29 @@ Public Class ImpedanceTransformForm
             ZoLabel.Text = CStr(mobjInterFormMessage.dblZo) & " Ohm"
 
             'Initialize all labels
-            X1Label.Text = CStr(mdblX1)
+            T1PhaseLabel.Text = CStr(mdblT1Phase)
             B1Label.Text = CStr(mdblB1)
             B2Label.Text = CStr(mdblB2)
-            X1LumpedLabel.Text = "Short"
+            T1LengthLabel.Text = "Through"
             B1LumpedLabel.Text = "Open"
             B2LumpedLabel.Text = "Open"
 
-            X1MaxTextBox.Text = CStr(mdblX1Max)
-            X1MinTextBox.Text = CStr(mdblX1Min)
+            T1PhaseMaxTextBox.Text = CStr(mdblT1PhaseMax)
+            T1PhaseMinTextBox.Text = CStr(mdblT1PhaseMin)
             B1MaxTextBox.Text = CStr(mdblB1Max)
             B1MinTextBox.Text = CStr(mdblB1Min)
             B2MaxTextBox.Text = CStr(mdblB2Max)
             B2MinTextBox.Text = CStr(mdblB2Min)
 
+            BetaLabel.Text = Format((2 * PI * mobjInterFormMessage.dblFreq) / mdblT1Vp, "####0.00")
             'Initialize trackbars
-            X1TrackBar.Enabled = False
+            T1TrackBar.Enabled = False
             B1TrackBar.Enabled = False
             B2TrackBar.Enabled = False
 
         Catch theException As Exception
 
-            MessageBox.Show("ImpedanceTransformForm_Load " & theException.Message, "Error",
+            MessageBox.Show("ImpedanceTransformForm2_Load " & theException.Message, "Error",
                      MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
@@ -575,7 +635,7 @@ Public Class ImpedanceTransformForm
             MainForm.SmithChartWindow.Refresh()
 
             'Enable all trackbars
-            X1TrackBar.Enabled = True
+            T1TrackBar.Enabled = True
             B1TrackBar.Enabled = True
             B2TrackBar.Enabled = True
 
@@ -585,15 +645,15 @@ Public Class ImpedanceTransformForm
         End Try
     End Sub
 
-    Private Sub X1TrackBar_Scroll(sender As Object, e As EventArgs) Handles X1TrackBar.Scroll
+    Private Sub T1TrackBar_Scroll(sender As Object, e As EventArgs) Handles T1TrackBar.Scroll
         Dim nIndex As Integer
-        Dim dblXLump As Double
+        Dim dblT1Length_mm As Double
         Dim dblwo As Double
+        Dim dblBeta As Double
 
-        nIndex = X1TrackBar.Value
-        mdblX1 = (nIndex * mdblX1Delta) + mdblX1Min
-        X1Label.Text = Format(mdblX1, "####0.00")
-        mobjX1.Imagninary = mdblX1  'Update the imaginary part of jX1
+        nIndex = T1TrackBar.Value
+        mdblT1Phase = (nIndex * mdblT1PhaseDelta) + mdblT1PhaseMin
+        T1PhaseLabel.Text = Format(mdblT1Phase, "####0.00")
         CalculateTin()              'Recalculate the new input impedance and update all relevant labels
         RinLabel.Text = Format(mobjZin.Real, "####0.00")
         XinLabel.Text = Format(mobjZin.Imagninary, "####0.00")
@@ -602,14 +662,13 @@ Public Class ImpedanceTransformForm
 
         'Calculate the corresponding lumped component and display on window
         dblwo = 2 * PI * mobjInterFormMessage.dblFreq  'Calculate frequency in rad/sec
-        If mdblX1 > 0.0 Then    'Inductance
-            dblXLump = (mdblX1 / dblwo) * 1000000000.0 'Normalize to nH
-            X1LumpedLabel.Text = "L=" & Format(dblXLump, "####0.00") & " nH"
-        ElseIf mdblX1 < 0.0 Then 'Capacitance
-            dblXLump = (1 / (-mdblX1 * dblwo)) * 1000000000000.0 'Normalize to pF
-            X1LumpedLabel.Text = "C=" & Format(dblXLump, "####0.00") & " pF"
+        dblBeta = dblwo / mdblT1Vp                     'Calculate propagation factor
+
+        If mdblT1Phase > 0.0 Then    'Delay
+            dblT1Length_mm = (mdblT1Phase / dblBeta) * 1000 'Normalize to mm
+            T1LengthLabel.Text = "Len=" & Format(dblT1Length_mm, "####0.00") & " mm"
         Else '0.0, short circuit
-            X1LumpedLabel.Text = "Short"
+            T1LengthLabel.Text = "Through"
         End If
 
         'Display this on the Smith Chart
@@ -687,32 +746,32 @@ Public Class ImpedanceTransformForm
         MainForm.SmithChartWindow.Refresh()
     End Sub
 
-    Private Sub X1MaxTextBox_TextChanged(sender As Object, e As EventArgs) Handles X1MaxTextBox.DoubleClick
+    Private Sub T1PhaseMaxTextBox_TextChanged(sender As Object, e As EventArgs) Handles T1PhaseMaxTextBox.DoubleClick
         Dim dblMaxTemp As Double
         Dim dblDeltaTemp As Double
         Dim nTemp As Integer
 
         Try
 
-            dblMaxTemp = Val(X1MaxTextBox.Text)
+            dblMaxTemp = Val(T1PhaseMaxTextBox.Text)
 
-            If dblMaxTemp > mdblX1Min Then              'Make sure the new value is greater than the minimum limit.
-                dblDeltaTemp = (dblMaxTemp - mdblX1Min) / (X1TrackBar.Maximum - X1TrackBar.Minimum) 'Update the interval for X1.
+            If dblMaxTemp > mdblT1PhaseMin Then              'Make sure the new value is greater than the minimum limit.
+                dblDeltaTemp = (dblMaxTemp - mdblT1PhaseMin) / (T1TrackBar.Maximum - T1TrackBar.Minimum) 'Update the interval for T1.
 
                 'The followings check for the validity of the new limits, then only updates all the relevant controls.
-                nTemp = Fix((mdblX1 - mdblX1Min) / dblDeltaTemp) 'Compute the new position of the tick in the Trackbar in relation of the new limits.
-                If nTemp <= X1TrackBar.Maximum Then     'Make sure this is within the trackbar!
-                    X1TrackBar.Value = nTemp            'Update tick position
-                    mdblX1Max = dblMaxTemp              'Update max limit
-                    mdblX1Delta = dblDeltaTemp          'Update interval
-                    X1MaxTextBox.Text = CStr(mdblX1Max) 'Update text
+                nTemp = Fix((mdblT1Phase - mdblT1PhaseMin) / dblDeltaTemp) 'Compute the new position of the tick in the Trackbar in relation of the new limits.
+                If nTemp <= T1TrackBar.Maximum Then         'Make sure this is within the trackbar!
+                    T1TrackBar.Value = nTemp                'Update tick position
+                    mdblT1PhaseMax = dblMaxTemp              'Update max limit
+                    mdblT1PhaseDelta = dblDeltaTemp          'Update interval
+                    T1PhaseMaxTextBox.Text = CStr(mdblT1PhaseMax) 'Update text
                 Else
                     MessageBox.Show("Invalid limit", "Error!", MessageBoxButtons.OK)
-                    X1MaxTextBox.Text = CStr(mdblX1Max)
+                    T1PhaseMaxTextBox.Text = CStr(mdblT1PhaseMax)
                 End If
             Else
                 MessageBox.Show("Invalid limit", "Error!", MessageBoxButtons.OK)
-                X1MaxTextBox.Text = CStr(mdblX1Max)
+                T1PhaseMaxTextBox.Text = CStr(mdblT1PhaseMax)
             End If
 
         Catch theException As Exception
@@ -721,31 +780,31 @@ Public Class ImpedanceTransformForm
         End Try
     End Sub
 
-    Private Sub X1MinTextBox_TextChanged(sender As Object, e As EventArgs) Handles X1MinTextBox.DoubleClick
+    Private Sub T1PhaseMinTextBox_TextChanged(sender As Object, e As EventArgs) Handles T1PhaseMinTextBox.DoubleClick
         Dim dblMinTemp As Double
         Dim dblDeltaTemp As Double
         Dim nTemp As Integer
 
         Try
-            dblMinTemp = Val(X1MinTextBox.Text)
+            dblMinTemp = Val(T1PhaseMinTextBox.Text)
 
-            If dblMinTemp < mdblX1Max Then              'Make sure the new value is less than the minimum limit.
-                dblDeltaTemp = (mdblX1Max - dblMinTemp) / (X1TrackBar.Maximum - X1TrackBar.Minimum) 'Update the interval for X1.
+            If (dblMinTemp < mdblT1PhaseMax) And (dblMinTemp >= 0) Then              'Make sure the new value is less than the minimum limit.
+                dblDeltaTemp = (mdblT1PhaseMax - dblMinTemp) / (T1TrackBar.Maximum - T1TrackBar.Minimum) 'Update the interval for T1.
 
                 'The followings check for the validity of the new limits, then only updates all the relevant controls.
-                nTemp = Fix((mdblX1 - dblMinTemp) / dblDeltaTemp) 'Compute the new position of the tick in the Trackbar in relation of the new limits.
-                If nTemp >= X1TrackBar.Minimum Then     'Make sure this is within the trackbar!
-                    X1TrackBar.Value = nTemp            'Update tick position
-                    mdblX1Min = dblMinTemp              'Update max limit
-                    mdblX1Delta = dblDeltaTemp          'Update interval
-                    X1MinTextBox.Text = CStr(mdblX1Min) 'Update text
+                nTemp = Fix((mdblT1Phase - dblMinTemp) / dblDeltaTemp) 'Compute the new position of the tick in the Trackbar in relation of the new limits.
+                If nTemp >= T1TrackBar.Minimum Then     'Make sure this is within the trackbar!
+                    T1TrackBar.Value = nTemp            'Update tick position
+                    mdblT1PhaseMin = dblMinTemp              'Update max limit
+                    mdblT1PhaseDelta = dblDeltaTemp          'Update interval
+                    T1PhaseMinTextBox.Text = CStr(mdblT1PhaseMin) 'Update text
                 Else
                     MessageBox.Show("Invalid limit", "Error!", MessageBoxButtons.OK)
-                    X1MinTextBox.Text = CStr(mdblX1Min)
+                    T1PhaseMinTextBox.Text = CStr(mdblT1PhaseMin)
                 End If
             Else
                 MessageBox.Show("Invalid limit", "Error!", MessageBoxButtons.OK)
-                X1MinTextBox.Text = CStr(mdblX1Min)
+                T1PhaseMinTextBox.Text = CStr(mdblT1PhaseMin)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error",
@@ -888,25 +947,70 @@ Public Class ImpedanceTransformForm
 
     End Sub
 
+    Private Sub T1VTextBox_TextChanged(sender As Object, e As EventArgs) Handles T1VTextBox.TextChanged
+
+        Dim dblTemp As Double
+
+        Try
+            dblTemp = Val(T1VTextBox.Text)
+
+            If dblTemp > 1.0 Then              'Make sure it is a number and positive.
+                mdblT1Vp = dblTemp
+                BetaLabel.Text = Format((2 * PI * mobjInterFormMessage.dblFreq) / mdblT1Vp, "####0.00")
+
+            Else
+                MessageBox.Show("Invalid number", "Error!", MessageBoxButtons.OK)
+                T1VTextBox.Text = CStr(mdblT1Vp)    'Restore the original 
+                'T1VTextBox.Text = Format(mdblT1Vp, )    'Restore the original value
+            End If
+
+        Catch theException As Exception
+            MessageBox.Show(theException.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     'Author             :  Fabian Kung
-    'Last date modified :  2nd March 2016
+    'Last date modified :  1st April 2016
     'Language           :  VB .NET
     'Description        :  Subroutine to compute the input impedance looking into a network, consisting
-    '                      of a load in series with a Pi network.
+    '                      of a load in series with double-stub transmission line network.
     'Argument           :  None
 
     Private Sub CalculateTin()
         Static Dim objY1 As New ComplexNumberClass(0, 0)
-        Static Dim objZ2 As New ComplexNumberClass(0, 0)
+        Static Dim objT1 As New ComplexNumberClass(0, 0)
+        Static Dim objZ1 As New ComplexNumberClass(0, 0)
+        Static Dim objT1p As New ComplexNumberClass(0, 0)
+        Static Dim objY1p As New ComplexNumberClass(0, 0)
+        Static Dim objTemp As New ComplexNumberClass(0, 0)
         Static Dim objNum As New ComplexNumberClass(0, 0)
+        Static Dim objY2 As New ComplexNumberClass(0, 0)
+        Static Dim objExp2BetaLen As New ComplexNumberClass(0, 0)
         Static Dim objDen As New ComplexNumberClass(0, 0)
+
         Dim objZo As New ComplexNumberClass(mobjInterFormMessage.dblZo, 0)
+        Dim dbl2BetaLen As Double
+
+
+        '2*(Phase of Transmission line 1), where the phase is
+        'given by Beta x Length.
+        dbl2BetaLen = 2.0 * mdblT1Phase
 
         objY1 = objY1.AddComplex(mobjYL, mobjB1)          'Y1 = jB1 + (1/ZL)
-        objY1 = objY1.DivComplex(mobj1Complex, objY1)     'Z1 = 1/Y1
-        objZ2 = objZ2.AddComplex(objY1, mobjX1)           'Z2 = jX1 + Z1
-        objZ2 = objZ2.DivComplex(mobj1Complex, objZ2)     'Y2 = 1/Z2
-        mobjYin = mobjYin.AddComplex(mobjB2, objZ2)      'Yin = jB2 + Y2
+        objZ1 = objY1.DivComplex(mobj1Complex, objY1)     'Z1 = 1/Y1
+        objT1 = objT1.SubComplex(objZ1, objZo)            'Form Z1-Zo
+        objTemp = objTemp.AddComplex(objZ1, objZo)        'Form Z1+Zo
+        objT1 = objT1.DivComplex(objT1, objTemp)          'T1 = (Z1-Zo)/(Z1+Zo)
+        objExp2BetaLen.Real = Math.Cos(dbl2BetaLen)       'Form exp(-j*2*Beta*Length)
+        objExp2BetaLen.Imagninary = Math.Sin(-dbl2BetaLen)
+        objT1p = objT1.MulComplex(objT1, objExp2BetaLen)   'Form T1p=T1*exp(-j*2*Beta*Length)
+        objY1p = objY1p.AddComplex(mobj1Complex, objT1p)   'Form 1+T1p
+        objY1p = objY1p.MulComplex(objY1p, objZo)          'Form (1+T1p)Zo
+        objTemp = objTemp.SubComplex(mobj1Complex, objT1p) 'Form 1-T1p
+
+        objY2 = objY2.DivComplex(objTemp, objY1p)           'Form Y2 = (1-T1p)/[(1+T1p)*Zo]
+        mobjYin = mobjYin.AddComplex(mobjB2, objY2)         'Yin = jB2 + Y2
         mobjZin = mobjZin.DivComplex(mobj1Complex, mobjYin) 'Zin = 1/Yin 
 
         'Calculate Tin = (Zin-Zo)/(Zin+Zo)
@@ -915,11 +1019,12 @@ Public Class ImpedanceTransformForm
         mobjTin = mobjTin.DivComplex(objNum, objDen)
     End Sub
 
-    Private Sub ImpedanceTransformForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub ImpedanceTransformForm2_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
-        mobjInterFormMessage.intID2 = 0 'Indicate this resources is disposed.
+        mobjInterFormMessage.intID3 = 0 'Indicate this resources is disposed.
 
     End Sub
+
 End Class
 
 

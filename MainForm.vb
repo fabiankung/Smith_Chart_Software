@@ -44,6 +44,7 @@ Public Class MainForm
     Friend WithEvents ActionMenuItem As System.Windows.Forms.MenuItem
     Friend WithEvents ActionSmithChartMenuItem As System.Windows.Forms.MenuItem
     Friend WithEvents ActionImpTranformMenuItem As System.Windows.Forms.MenuItem
+    Friend WithEvents ActionImpedanceTransformMenuItem2 As System.Windows.Forms.MenuItem
     Friend WithEvents FilePrintMenuItem As System.Windows.Forms.MenuItem
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
@@ -55,6 +56,7 @@ Public Class MainForm
         Me.ActionMenuItem = New System.Windows.Forms.MenuItem()
         Me.ActionSmithChartMenuItem = New System.Windows.Forms.MenuItem()
         Me.ActionImpTranformMenuItem = New System.Windows.Forms.MenuItem()
+        Me.ActionImpedanceTransformMenuItem2 = New System.Windows.Forms.MenuItem()
         Me.OptionMenuItem = New System.Windows.Forms.MenuItem()
         Me.OptionSettingMenuItem = New System.Windows.Forms.MenuItem()
         Me.MenuItem2 = New System.Windows.Forms.MenuItem()
@@ -89,7 +91,7 @@ Public Class MainForm
         'ActionMenuItem
         '
         Me.ActionMenuItem.Index = 1
-        Me.ActionMenuItem.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.ActionSmithChartMenuItem, Me.ActionImpTranformMenuItem})
+        Me.ActionMenuItem.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.ActionSmithChartMenuItem, Me.ActionImpTranformMenuItem, Me.ActionImpedanceTransformMenuItem2})
         Me.ActionMenuItem.Text = "A&ction"
         '
         'ActionSmithChartMenuItem
@@ -100,7 +102,12 @@ Public Class MainForm
         'ActionImpTranformMenuItem
         '
         Me.ActionImpTranformMenuItem.Index = 1
-        Me.ActionImpTranformMenuItem.Text = "Perform Impedance Transform"
+        Me.ActionImpTranformMenuItem.Text = "Perform Impedance Transform - Lumped"
+        '
+        'ActionImpedanceTransformMenuItem2
+        '
+        Me.ActionImpedanceTransformMenuItem2.Index = 2
+        Me.ActionImpedanceTransformMenuItem2.Text = "Perform Impedance Transform - Stub"
         '
         'OptionMenuItem
         '
@@ -160,18 +167,18 @@ Public Class MainForm
 #End Region
 
     'Author:            Fabian Kung Wai Lee
-    'Last modified:     2nd March 2016
+    'Last modified:     20th May 2017
     'Description:       Main form codes for RF CAD software       
     'Filename:          MainForm.vb
     'Language:          Visual Basic .NET
-    'Development tool:  Microsoft Visual Studio .NET 2013 Express
+    'Development tool:  Microsoft Visual Studio .NET 2016 Express
 
     '--- Module level declarations ---
     'Information about this software
-    Private mstrFormTitle As String = "RF CAD"
-    Private mstrVersion As String = "0.90"
+    Private mstrFormTitle As String = "fSMITH"
+    Private mstrVersion As String = "0.98"
     Private mstrAuthor As String = "Fabian Kung Wai Lee"
-    Private mstrDate As String = "8th March 2016"
+    Private mstrDate As String = "20th May 2017"
 
     'Variables
     Private mdblZo As Double = 50.0 'Reference impedance
@@ -181,6 +188,7 @@ Public Class MainForm
     Public InterFormMessage As New MessageClass
     Public SmithChartWindow As New SmithChartForm
     Private ImpedanceTransformWindow As New ImpedanceTransformForm
+    Private ImpedanceTransformWindow2 As New ImpedanceTransformForm2
 
     Private Sub MainForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -193,7 +201,9 @@ Public Class MainForm
             'Initialize inter-form communication class object
             'Variables:
             With InterFormMessage
-                .intID = 1
+                .intID = 1                  'Indicate Smith Chart window is loaded.
+                .intID2 = 1                 'Indicate ImpedanceTransformWIndow is loaded.
+                .intID3 = 1                 'Indicate ImpedanceTransformWIndow2 is loaded.
                 .dblZo = mdblZo
                 .dblFreq = mdblfreq
             End With
@@ -279,11 +289,46 @@ Public Class MainForm
 
     Private Sub ActionImpTranformMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActionImpTranformMenuItem.Click
 
-        'Set the title and version of the Impedance Transform Window
-        ImpedanceTransformWindow.mstrFormTitle = mstrFormTitle
-        ImpedanceTransformWindow.mstrVersion = mstrVersion & " - Pi Network Transform"
-        'Show Impedance Transform window
-        ImpedanceTransformWindow.Show()
+        Try
+            'If the ID2=0, this implies the ImpedanceTransformWindow form 
+            'has been closed by the user.  So a new form has to be created.
+            If InterFormMessage.intID2 = 0 Then
+                ImpedanceTransformWindow = New ImpedanceTransformForm
+                InterFormMessage.intID2 = 1
+            End If
+
+            'Set the title and version of the Impedance Transform Window
+            ImpedanceTransformWindow.mstrFormTitle = mstrFormTitle
+            ImpedanceTransformWindow.mstrVersion = mstrVersion & " - Pi Network Transform"
+            'Show Impedance Transform window
+            ImpedanceTransformWindow.Show()
+        Catch ex As Exception
+            MessageBox.Show("Error in displaying window", "Error",
+                      MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+    Private Sub ActionImpedanceTransformMenuItem2_Click(sender As Object, e As EventArgs) Handles ActionImpedanceTransformMenuItem2.Click
+
+        Try
+            'If the ID3=0, this implies the ImpedanceTransformWindow2 form 
+            'has been closed by the user.  So a new form has to be created.
+            If InterFormMessage.intID3 = 0 Then
+                ImpedanceTransformWindow2 = New ImpedanceTransformForm2
+                InterFormMessage.intID3 = 1
+            End If
+
+            'Set the title and version of the Impedance Transform Window
+            ImpedanceTransformWindow2.mstrFormTitle = mstrFormTitle
+            ImpedanceTransformWindow2.mstrVersion = mstrVersion & " - Single/double Stubs Network Transform"
+            'Show Impedance Transform window
+            ImpedanceTransformWindow2.Show()
+
+        Catch ex As Exception
+            MessageBox.Show("Error in displaying window", "Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
 
     End Sub
 
@@ -304,6 +349,9 @@ Public Class MainForm
 
             ImpedanceTransformWindow.FrequencyLabel.Text = CStr(mdblfreq / 1000000) & " MHz"
             ImpedanceTransformWindow.ZoLabel.Text = CStr(mdblZo) & " Ohm"
+
+            ImpedanceTransformWindow2.FrequencyLabel.Text = CStr(mdblfreq / 1000000) & " MHz"
+            ImpedanceTransformWindow2.ZoLabel.Text = CStr(mdblZo) & " Ohm"
         Catch
 
             MessageBox.Show("Error in displaying window", "Error", _
@@ -311,8 +359,6 @@ Public Class MainForm
 
         End Try
     End Sub
-
-
-
+   
 End Class
 
