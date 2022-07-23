@@ -1,4 +1,6 @@
 # Smith_Chart_Software
+![Screenshot](fSmithScreenShot.jpg)
+
 Windows Smith Chart software for RF circuit design.
 This software allows the user to perform interactive impedance transformation and matching 
 on a Smith Chart. Please visit this [blog](https://fkeng.blogspot.com/2016/03/smith-chart-software-for-rf-circuit.html)
